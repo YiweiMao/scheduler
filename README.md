@@ -1,7 +1,7 @@
 # scheduler
 > The simplest C task scheduler for microcontrollers
 
-You only need to know **one** function and that is `run_later` which schedules a callback function to be run at a later time. The callback function must be of type `void` with no arguments. 
+You only need to know ***one*** function and that is `run_later` which schedules a callback function to be run at a later time. The callback function must be of type `void` with no arguments. 
 
 To create a task that reschedules itself, simply call `run_later` on itself with a specified wait time. For example, this is how the blink function is written. 
 
