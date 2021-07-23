@@ -1,21 +1,23 @@
 
 #include "scheduler.h"
 
-#define SERIAL_REFRESH_TIME_MS 500
+#define SERIAL_REFRESH_TIME_MS 1000
 char c;
 
 void serial_callback(){
+  
+  if (Serial.available() > 0) {
+    c = Serial.read();
+    // clear the serial buffer
+    while(Serial.available()) {Serial.read();}
+  }
+  
+  Serial.print("Hello world! "); Serial.println(c);
+
   // enter 's' to stop the serial callbacks
   if (c != 's'){
     run_later(serial_callback, SERIAL_REFRESH_TIME_MS);
   }
-  
-  if (Serial.available() > 0) {
-    c = Serial.read();
-    Serial.flush();
-  }
-  
-  Serial.print("Hello world! "); Serial.println(c);
 }
 
 
@@ -31,7 +33,3 @@ void setup(){
 void loop(){  
   run();
 }
-
-
-
-
